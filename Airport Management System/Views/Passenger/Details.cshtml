@@ -1,0 +1,22 @@
+﻿@model Airport_Management_System.Models.PassengerDto
+
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<a href="/Passenger/List">Go Back to list</a>
+<br />
+<a href="/Passenger/Edit/@Model.PassengerId">Edit</a>
+<br />
+<a style="color:#ab2020;" href="/Passenger/DeleteConfirm/@Model.PassengerId">Delete</a>
+<h2>@Model.PassengerFName @Model.PassengerLName</h2>
+<div>Passport Number: @Model.PassengerPassport</div>
+<div>Check-in Time: @Model.CheckInStatus</div>
+<div>Class: @Model.PassengerSeatingClasses</div>
+<div>Seating Number: @Model.PassengerSeatingNum</div>
+<div>Flight: @Model.FlightNum</div>
+
+
+

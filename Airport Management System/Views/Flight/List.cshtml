@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Airport_Management_System.Models.FlightDto>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List Flights</h2>
+<a href="/Flight/New">New Flight</a>
+@foreach (var flight in Model)
+{
+    <h2><a href="/Flight/Details/@flight.FlightId">@flight.FlightNum</a></h2>
+    <div>FlightNum: @flight.FlightNum</div>
+    <div>Airline: @flight.Airline</div>
+    <div>Terminal: @flight.Terminal</div>
+    <div>Gate: @flight.Gate</div>
+    <div>Status: @flight.FlightStatus</div>
+    <div>Destination: @flight.Destination</div>
+    <div>Departure Time: @flight.DepartureTime</div>
+
+}

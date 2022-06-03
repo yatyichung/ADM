@@ -1,0 +1,20 @@
+﻿@model Airport_Management_System.Models.PassengerDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this passenger?</h2>
+<a href="/Passenger/List">Cancel</a>
+<h2>@Model.PassengerFName @Model.PassengerLName</h2>
+<div>Passport Number: @Model.PassengerPassport</div>
+<div>Check-in Time: @Model.CheckInStatus</div>
+<div>Flight: @Model.FlightNum</div>
+<div>Class: @Model.PassengerSeatingClasses</div>
+<div>Seating Number: @Model.PassengerSeatingNum</div>
+
+
+<form action="/Passenger/Delete/@Model.PassengerId" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>

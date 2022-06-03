@@ -1,0 +1,20 @@
+﻿@model Airport_Management_System.Models.FlightDto
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Details - @Model.FlightNum</h2>
+
+<a href="/Flight/List">Go Back to list</a>
+<br />
+<a href="/Flight/Edit/@Model.FlightId">Edit</a>
+<br />
+<a style="color:#ab2020;" href="/Flight/DeleteConfirm/@Model.FlightId">Delete</a>
+<div>Airline: @Model.Airline</div>
+<div>Terminal: @Model.Terminal</div>
+<div>Gate: @Model.Gate</div>
+<div>Status: @Model.FlightStatus</div>
+<div>Destination: @Model.Destination</div>
+<div>Departure Time: @Model.DepartureTime</div>
+<div>ArrivalTime: @Model.ArrivalTime</div>

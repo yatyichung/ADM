@@ -1,0 +1,47 @@
+﻿@model Airport_Management_System.Models.PassengerDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div>
+    <h1>Edit Passenger Info</h1>
+
+</div>
+<nav>
+    <ul>
+        <li><a href="/Passenger/Details/@Model.PassengerId">Back to @Model.PassengerFName @Model.PassengerLName </a></li>
+        <li><a href="/Passenger/List">Go back to passenger list</a></li>
+    </ul>
+</nav>
+
+<form action="/Passenger/Update/@Model.PassengerId" method="POST">
+    <div style="display:none;">
+        @* Pass through the passenger ID *@
+        <input type="number" name="PassengerId" value="@Model.PassengerId" />
+    </div>
+    <div>
+        <label>First name: </label><input type="text" name="PassengerFName" value="@Model.PassengerFName" />
+    </div>
+    <div>
+        <label>Last name: </label><input type="text" name="PassengerLName" value="@Model.PassengerLName"/>
+    </div>
+    <div>
+        <label>Passport number: </label><input type="text" name="PassengerPassport" value="@Model.PassengerPassport"  />
+    </div>
+    <div>
+        <label>Check-in time: </label><input type="datetime-local" value="@Model.CheckInStatus" name="CheckInStatus" />
+    </div>
+    <div>
+        <label>Class: </label><input type="text" name="PassengerSeatingClasses" value="@Model.PassengerSeatingClasses"  />
+    </div>
+    <div>
+        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" value="@Model.PassengerSeatingNum"  />
+    </div>
+    <div>
+        <label>Flight Id: </label><input type="text" value="@Model.FlightId" name="FlightId" />
+    </div>
+    <div>
+        <input type="submit" value="Update Passenger" />
+    </div>
+</form>

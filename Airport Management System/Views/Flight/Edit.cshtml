@@ -1,0 +1,47 @@
+﻿@model Airport_Management_System.Models.FlightDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1>Edit Flight Info</h1>
+<nav>
+    <ul>
+        <li><a href="/Flight/Details/@Model.FlightId">Back to @Model.FlightNum</a></li>
+        <li><a href="/Flight/List">Go back to flight list</a></li>
+    </ul>
+</nav>
+
+<form action="/Flight/Update/@Model.FlightId" method="POST">
+    <div style="display:none;">
+        @* Pass through the flight ID *@
+        <input type="number" name="FlightId" value="@Model.FlightId" />
+    </div>
+    <div>
+        <label>Airline: </label><input type="text" name="Airline" placeholder="Air Canada" value="@Model.Airline" />
+    </div>
+    <div>
+        <label>Flight number: </label><input type="text" name="FlightNum" placeholder="AC3110" value="@Model.FlightNum" />
+    </div>
+    <div>
+        <label>Terminal: </label><input type="number" name="Terminal" placeholder="1"  value="@Model.Terminal"/>
+    </div>
+    <div>
+        <label>Gate: </label><input type="text" name="Gate" placeholder="C15" value="@Model.Gate" />
+    </div>
+    <div>
+        <label>Destination: </label><input type="text" name="Destination" placeholder="Sudbury"  value="@Model.Destination"/>
+    </div>
+    <div>
+        <label>DepartureTime: </label><input type="datetime-local" name="DepartureTime" value="@Model.DepartureTime"/>
+    </div>
+    <div>
+        <label>Arrival Time: </label><input type="datetime-local" name="ArrivalTime" value="@Model.ArrivalTime"/>
+    </div>
+    <div>
+        <label>FlightStatus: </label><input type="text" name="FlightStatus" value="@Model.FlightStatus" />
+    </div>
+    <div>
+        <input type="submit" value="Update Flight" />
+    </div>
+</form>
