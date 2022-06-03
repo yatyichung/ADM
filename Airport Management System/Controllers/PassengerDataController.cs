@@ -19,6 +19,7 @@ namespace Airport_Management_System.Controllers
 
         // GET: api/PassengerData/ListPassengers
         [HttpGet]
+
         public IEnumerable<PassengerDto> ListPassengers()
         {
             List<Passenger> Passengers= db.Passengers.ToList();
@@ -39,6 +40,33 @@ namespace Airport_Management_System.Controllers
 
             return PassengerDtos;
         }
+
+        
+        // GET: api/PassengerData/ListPassengersForFlight
+        [HttpGet]
+        public IEnumerable<PassengerDto> ListPassengersForFlight(int id)
+        {
+            List<Passenger> Passengers = db.Passengers.Where(a=>a.FlightId==id).ToList();
+            List<PassengerDto> PassengerDtos = new List<PassengerDto>();
+
+            Passengers.ForEach(a => PassengerDtos.Add(new PassengerDto()
+            {
+                PassengerId = a.PassengerId,
+                PassengerFName = a.PassengerFName,
+                PassengerLName = a.PassengerLName,
+                PassengerPassport = a.PassengerPassport,
+                CheckInStatus = a.CheckInStatus,
+                PassengerSeatingClasses = a.PassengerSeatingClasses,
+                PassengerSeatingNum = a.PassengerSeatingNum,
+                FlightNum = a.Flight.FlightNum,
+                FlightId = a.Flight.FlightId
+            }));
+
+            return PassengerDtos;
+        }
+
+
+
 
         // GET: api/PassengerData/FindPassenger/17
         // GET: api/PassengerData/FindPassenger/26

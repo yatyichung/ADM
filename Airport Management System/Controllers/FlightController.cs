@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using Airport_Management_System.Models;
+using Airport_Management_System.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace Airport_Management_System.Controllers
@@ -19,13 +20,13 @@ namespace Airport_Management_System.Controllers
         static FlightController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/flightdata/");
+            client.BaseAddress = new Uri("https://localhost:44345/api/");
         }
 
         // GET: Flight/List
         public ActionResult List()
         {
-            string url = "listflights";
+            string url = "flightdata/listflights";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<FlightDto> flights = response.Content.ReadAsAsync<IEnumerable<FlightDto>>().Result;
@@ -39,17 +40,28 @@ namespace Airport_Management_System.Controllers
             //objective: communicate with our flight data api to retrieve one flight
             //curl https://localhost:44345/api/flightdata/findflight/{id}
 
-            string url = "findflight/" + id;
+            DetailsFlight ViewModel = new DetailsFlight();
+
+            string url = "flightdata/findflight/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             // Debug.WriteLine("The response code is ");
             //Debug.WriteLine(response.StatusCode);
 
-            FlightDto selectedflight = response.Content.ReadAsAsync<FlightDto>().Result;
+            FlightDto SelectedFlight = response.Content.ReadAsAsync<FlightDto>().Result;
             //Debug.WriteLine("Passenger receieved: ");
             //Debug.WriteLine(selectedpassenger.PassengerLName);
 
-            return View(selectedflight);
+            ViewModel.SelectedFlight = SelectedFlight;
+            //showcase informatino about passengers related to this flight
+            //send a request to gather information about passengers related to a particular flight ID
+            url = "passengerdata/listpassengersforflight/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PassengerDto> RelatedPassengers = response.Content.ReadAsAsync<IEnumerable<PassengerDto>>().Result; ;
+
+            ViewModel.RelatedPassengers = RelatedPassengers;
+
+            return View(ViewModel);
         }
 
         // GET: Flight/New
@@ -67,7 +79,7 @@ namespace Airport_Management_System.Controllers
 
             //objective: add a new passenger into the system using the API
             //curl -H "Content-Type:application/json" -d @flight.json https://localhost:44345/api/flightdata/addflight
-            string url = "addflight";
+            string url = "flightdata/addflight";
 
 
             string jsonpayload = jss.Serialize(flight);
@@ -92,7 +104,7 @@ namespace Airport_Management_System.Controllers
         // POST: Flight/Edit/21
         public ActionResult Edit(int id)
         {
-            string url = "findflight/" + id;
+            string url = "flightdata/findflight/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             FlightDto selectedflight = response.Content.ReadAsAsync<FlightDto>().Result;
             return View(selectedflight);
@@ -104,7 +116,7 @@ namespace Airport_Management_System.Controllers
         {
             //objective: update the flight info in the system
             //curl -H "Content-Type:application/json" -d @flight.json https://localhost:44345/api/flightdata/updateflight
-            string url = "UpdateFlight/" + id;
+            string url = "flightdata/UpdateFlight/" + id;
             string jsonpayload = jss.Serialize(flight);
 
             HttpContent content = new StringContent(jsonpayload);
@@ -125,7 +137,7 @@ namespace Airport_Management_System.Controllers
         // GET: Flight/Delete/21
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "findflight/" + id;
+            string url = "flightdata/findflight/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             FlightDto selectedflight = response.Content.ReadAsAsync<FlightDto>().Result;
             return View(selectedflight);
@@ -136,7 +148,7 @@ namespace Airport_Management_System.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "deleteflight/" + id;
+            string url = "flightdata/deleteflight/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

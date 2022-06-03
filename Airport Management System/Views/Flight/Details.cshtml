@@ -1,20 +1,32 @@
-﻿@model Airport_Management_System.Models.FlightDto
+﻿@model Airport_Management_System.Models.ViewModels.DetailsFlight
 
 @{
     ViewBag.Title = "View";
 }
 
-<h2>Details - @Model.FlightNum</h2>
+<h2>Details - @Model.SelectedFlight.FlightNum</h2>
 
 <a href="/Flight/List">Go Back to list</a>
 <br />
-<a href="/Flight/Edit/@Model.FlightId">Edit</a>
+<a href="/Flight/Edit/@Model.SelectedFlight.FlightId">Edit</a>
 <br />
-<a style="color:#ab2020;" href="/Flight/DeleteConfirm/@Model.FlightId">Delete</a>
-<div>Airline: @Model.Airline</div>
-<div>Terminal: @Model.Terminal</div>
-<div>Gate: @Model.Gate</div>
-<div>Status: @Model.FlightStatus</div>
-<div>Destination: @Model.Destination</div>
-<div>Departure Time: @Model.DepartureTime</div>
-<div>ArrivalTime: @Model.ArrivalTime</div>
+<a style="color:#ab2020;" href="/Flight/DeleteConfirm/@Model.SelectedFlight.FlightId">Delete</a>
+<div>Airline: @Model.SelectedFlight.Airline</div>
+<div>Terminal: @Model.SelectedFlight.Terminal</div>
+<div>Gate: @Model.SelectedFlight.Gate</div>
+<div>Status: @Model.SelectedFlight.FlightStatus</div>
+<div>Destination: @Model.SelectedFlight.Destination</div>
+<div>Departure Time: @Model.SelectedFlight.DepartureTime</div>
+<div>ArrivalTime: @Model.SelectedFlight.ArrivalTime</div>
+
+
+<div style="margin-top:150px;">
+
+    <h3>Passengers in Flight @Model.SelectedFlight.FlightNum .</h3>
+    @foreach(var passenger in Model.RelatedPassengers)
+            {
+                <a href="/passenger/Details/@passenger.PassengerId">@passenger.PassengerFName @passenger.PassengerLName</a>
+                <br />
+            }
+
+</div>
