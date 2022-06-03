@@ -1,4 +1,4 @@
-﻿@model Airport_Management_System.Models.PassengerDto
+﻿@model Airport_Management_System.Models.ViewModels.UpdatePassenger
 
 @{
     ViewBag.Title = "Edit";
@@ -10,36 +10,43 @@
 </div>
 <nav>
     <ul>
-        <li><a href="/Passenger/Details/@Model.PassengerId">Back to @Model.PassengerFName @Model.PassengerLName </a></li>
+        <li><a href="/Passenger/Details/@Model.SelectedPassenger.PassengerId">Back to @Model.SelectedPassenger.PassengerFName @Model.SelectedPassenger.PassengerLName </a></li>
         <li><a href="/Passenger/List">Go back to passenger list</a></li>
     </ul>
 </nav>
 
-<form action="/Passenger/Update/@Model.PassengerId" method="POST">
+<form action="/Passenger/Update/@Model.SelectedPassenger.PassengerId" method="POST">
     <div style="display:none;">
         @* Pass through the passenger ID *@
-        <input type="number" name="PassengerId" value="@Model.PassengerId" />
+        <input type="number" name="PassengerId" value="@Model.SelectedPassenger.PassengerId" />
     </div>
     <div>
-        <label>First name: </label><input type="text" name="PassengerFName" value="@Model.PassengerFName" />
+        <label>First name: </label><input type="text" name="PassengerFName" value="@Model.SelectedPassenger.PassengerFName" />
     </div>
     <div>
-        <label>Last name: </label><input type="text" name="PassengerLName" value="@Model.PassengerLName"/>
+        <label>Last name: </label><input type="text" name="PassengerLName" value="@Model.SelectedPassenger.PassengerLName"/>
     </div>
     <div>
-        <label>Passport number: </label><input type="text" name="PassengerPassport" value="@Model.PassengerPassport"  />
+        <label>Passport number: </label><input type="text" name="PassengerPassport" value="@Model.SelectedPassenger.PassengerPassport"  />
     </div>
     <div>
-        <label>Check-in time: </label><input type="datetime-local" value="@Model.CheckInStatus" name="CheckInStatus" />
+        <label>Check-in time: </label><input type="datetime-local" value="@Model.SelectedPassenger.CheckInStatus" name="CheckInStatus" />
     </div>
     <div>
-        <label>Class: </label><input type="text" name="PassengerSeatingClasses" value="@Model.PassengerSeatingClasses"  />
+        <label>Class: </label><input type="text" name="PassengerSeatingClasses" value="@Model.SelectedPassenger.PassengerSeatingClasses"  />
     </div>
     <div>
-        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" value="@Model.PassengerSeatingNum"  />
+        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" value="@Model.SelectedPassenger.PassengerSeatingNum"  />
     </div>
     <div>
-        <label>Flight Id: </label><input type="text" value="@Model.FlightId" name="FlightId" />
+        <label>Flight Id: </label>
+
+        <select name="FlightId">
+            @foreach (var flight in Model.FlightsOptions)
+            {
+                <option value="@flight.FlightId">@flight.FlightNum</option>
+            }
+        </select>
     </div>
     <div>
         <input type="submit" value="Update Passenger" />

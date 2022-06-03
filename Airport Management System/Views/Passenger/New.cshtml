@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Airport_Management_System.Models.FlightDto>
+
 @{
     ViewBag.Title = "Create";
 }
@@ -16,16 +17,23 @@
         <label>Passport number: </label><input type="text" name="PassengerPassport" placeholder="HK12345678" />
     </div>
     <div>
-        <label>Check-in time: </label><input type="datetime-local"  name="CheckInStatus"/>
+        <label>Check-in time: </label><input type="datetime-local" name="CheckInStatus" />
     </div>
     <div>
         <label>Class: </label><input type="text" name="PassengerSeatingClasses" placeholder="First Class/Business/Economy" />
     </div>
     <div>
-        <label>Seating number: </label><input type="text" name="PassengerSeatingNum"  placeholder="G15" />
+        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" placeholder="G15" />
     </div>
     <div>
-        <label>Flight Id: </label><input type="number"  name="FlightId"/>
+        <label>Flight Id: </label>
+        <select name="FlightId">
+            @foreach (var flight in Model)
+            {
+                <option value="@flight.FlightId">@flight.FlightNum</option>
+            }
+        </select>
+       
     </div>
     <div>
         <input type="submit" value="Add Passenger" />

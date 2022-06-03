@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Diagnostics;
 using Airport_Management_System.Models;
 using System.Web.Script.Serialization;
+using Airport_Management_System.Models.ViewModels;
 
 namespace Airport_Management_System.Controllers
 {
@@ -19,7 +20,7 @@ namespace Airport_Management_System.Controllers
         static PassengerController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/passengerdata/");
+            client.BaseAddress = new Uri("https://localhost:44345/api/");
         }
 
 
@@ -35,7 +36,7 @@ namespace Airport_Management_System.Controllers
             //curl https://localhost:44345/api/passengerdata/listpassengers
 
            
-            string url = "listpassengers";
+            string url = "passengerdata/listpassengers";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
            // Debug.WriteLine("The response code is ");
@@ -54,17 +55,17 @@ namespace Airport_Management_System.Controllers
             //objective: communicate with our passenger data api to retrieve one passenger
             //curl https://localhost:44345/api/passengerdata/findpassenger/{id}
 
-            string url = "findpassenger/"+id;
+            string url = "passengerdata/findpassenger/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
            // Debug.WriteLine("The response code is ");
             //Debug.WriteLine(response.StatusCode);
 
-           PassengerDto selectedpassenger = response.Content.ReadAsAsync<PassengerDto>().Result;
+           PassengerDto SelectedPassenger = response.Content.ReadAsAsync<PassengerDto>().Result;
             //Debug.WriteLine("Passenger receieved: ");
-            //Debug.WriteLine(selectedpassenger.PassengerLName);
+            //Debug.WriteLine(SelectedPassenger.PassengerLName);
 
-            return View(selectedpassenger);
+            return View(SelectedPassenger);
         }
 
         public ActionResult Error()
@@ -77,7 +78,14 @@ namespace Airport_Management_System.Controllers
         // GET: Passenger/New
         public ActionResult New()
         {
-            return View();
+            //information about all flights in the system
+            //GET api/flightdata/listflights
+            string url = "flightdata/listflights";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<FlightDto> FlightsOptions = response.Content.ReadAsAsync<IEnumerable<FlightDto>>().Result;
+
+
+            return View(FlightsOptions);
         }
 
         // POST: Passenger/Create
@@ -89,7 +97,7 @@ namespace Airport_Management_System.Controllers
 
             //objective: add a new passenger into the system using the API
             //curl -H "Content-Type:application/json" -d @passenger.json https://localhost:44345/api/passengerdata/addpassenger
-            string url = "addpassenger";
+            string url = "passengerdata/addpassenger";
 
 
             string jsonpayload = jss.Serialize(passenger);
@@ -116,10 +124,21 @@ namespace Airport_Management_System.Controllers
         // POST: Passenger/Edit/17
       public ActionResult Edit(int id)
         {
-            string url = "findpassenger/"+id;
+            UpdatePassenger ViewModel = new UpdatePassenger();
+
+            //the existing passenger information 
+            string url = "passengerdata/findpassenger/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            PassengerDto selectedpassenger = response.Content.ReadAsAsync<PassengerDto>().Result;
-            return View(selectedpassenger);
+            PassengerDto SelectedPassenger = response.Content.ReadAsAsync<PassengerDto>().Result;
+            ViewModel.SelectedPassenger = SelectedPassenger;
+
+            // all flights to choose from when updating this passenger
+            url = "flightdata/listflights/";
+            response = client.GetAsync(url).Result;
+           IEnumerable<FlightDto> FlightsOptions = response.Content.ReadAsAsync<IEnumerable<FlightDto>>().Result;
+
+            ViewModel.FlightsOptions = FlightsOptions;
+            return View(ViewModel);
 
         }
 
@@ -129,7 +148,7 @@ namespace Airport_Management_System.Controllers
         {
             //objective: update the passenger info in the system
             //curl -H "Content-Type:application/json" -d @passenger.json https://localhost:44345/api/passengerdata/updatepassenger
-            string url = "UpdatePassenger/" + id;
+            string url = "passengerdata/UpdatePassenger/" + id;
             string jsonpayload = jss.Serialize(passenger);
 
             HttpContent content = new StringContent(jsonpayload);
@@ -150,7 +169,7 @@ namespace Airport_Management_System.Controllers
          // GET: Passenger/Delete/28
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "findpassenger/" + id;
+            string url = "passengerdata/findpassenger/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             PassengerDto selectedpassenger = response.Content.ReadAsAsync<PassengerDto>().Result;
             return View(selectedpassenger);
@@ -161,7 +180,7 @@ namespace Airport_Management_System.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "deletepassenger/" + id;
+            string url = "passengerdata/deletepassenger/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
