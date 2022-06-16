@@ -5,7 +5,15 @@
 
 
 <h2>🏃 Run the project</h2>
+   <li>Clone a repository > (enter repository location) https://github.com/yatyichung/HTTP5212_PassionProject_n01492932.git</li>
+  <li> Make sure there is an App_Data folder in the project (Right click solution > View in File Explorer)</li>
+  <li>Tools > Nuget Package Manager > Package Manage Console > Update-Database</li>
+  <li>Check that the database is created using (View > SQL Server Object Explorer > MSSQLLocalDb > ..)</li>
+  <li>Run API commands through CURL to create new animals</li>
+ 
+
+
 
 <h2>✨ About </h2>
-Airport Database Management is a web application built using C# in the ASP.NET MVC framework. It is a minimum viable product that allows unauthorized users (passengers) to view the flight schedule of the day departs from Toronto Pearson Airport and authorized users (employee/database adminstrator) to Create, Read, Updata, and Delete data from both the flight schedule as well as the passenger list.  
+Airport Database Management is a web application built using C# in the ASP.NET MVC framework along with the internal SQL server. It is a minimum viable product that allows unauthorized users (passengers) to view the flight schedule of the day departs from Toronto Pearson Airport and authorized users (employee/database adminstrator) to Create, Read, Updata, and Delete data from both the flight schedule as well as the passenger list.  
   
