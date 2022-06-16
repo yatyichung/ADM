@@ -5,16 +5,50 @@
 }
 
 <h2>List Flights</h2>
-<a href="/Flight/New">New Flight</a>
-@foreach (var flight in Model)
-{
-    <h2><a href="/Flight/Details/@flight.FlightId">@flight.FlightNum</a></h2>
-    <div>FlightNum: @flight.FlightNum</div>
-    <div>Airline: @flight.Airline</div>
-    <div>Terminal: @flight.Terminal</div>
-    <div>Gate: @flight.Gate</div>
-    <div>Status: @flight.FlightStatus</div>
-    <div>Destination: @flight.Destination</div>
-    <div>Departure Time: @flight.DepartureTime</div>
+<a href="/Flight/New" type="button" class="btn btn-info">Add A Flight</a>
 
-}
+<table>
+    <tr>
+        <th>Flight Number </th>
+        <th>Airline</th>
+        <th>Terminal</th>
+        <th>Gate</th>
+        <th>Status</th>
+        <th>Destination</th>
+        <th>Departure Time</th>
+    </tr>
+    @foreach (var flight in Model)
+    {
+        <tr>
+            <td>@flight.FlightNum</td>
+            <td>@flight.Airline</td>
+            <td>@flight.Terminal</td>
+            <td>@flight.Gate</td>
+            <td>@flight.FlightStatus</td>
+            <td>@flight.Destination</td>
+            <td>@flight.DepartureTime</td>
+            <td><a href="/Flight/Details/@flight.FlightId">View Details</a></td>
+        </tr>
+    }
+    </table>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th{
+        font-weight:bold;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    tr:nth-child(even) {
+        background-color: lightsteelblue;
+    }
+</style>

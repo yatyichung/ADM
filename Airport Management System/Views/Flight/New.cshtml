@@ -6,32 +6,40 @@
 <h2>Create Flight</h2>
 
 <form action="/Flight/Create" method="POST">
-    <div>
-        <label>Airline: </label><input type="text" name="Airline" placeholder="Air Canada" />
+    <div class="form-group">
+        <label for="Airline">Airline: </label>
+        <input type="text" name="Airline" placeholder="Air Canada"  id="Airline" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="FlightNum">Flight number: </label>
+        <input type="text" name="FlightNum" placeholder="AC3110" id="FlightNum" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Terminal">Terminal: </label>
+        <input type="number" name="Terminal" placeholder="1"  id="Terminal" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="Gate">Gate: </label>
+        <input type="text" name="Gate" placeholder="C15"  id="Gate" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="Destination">Destination: </label>
+        <input type="text" name="Destination" placeholder="Sudbury"  id="Destination" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="DepartureTime">DepartureTime: </label>
+        <input type="datetime-local" name="DepartureTime"  id="DepartureTime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="ArrivalTime">Arrival Time: </label>
+        <input type="datetime-local" name="ArrivalTime"  id="ArrivalTime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="FlightStatus">FlightStatus: </label>
+        <input type="text" name="FlightStatus"  id="FlightStatus" placeholder="On Time/ Delayed/ Cancelled" class="form-control"/>
     </div>
     <div>
-        <label>Flight number: </label><input type="text" name="FlightNum" placeholder="AC3110" />
-    </div>
-    <div>
-        <label>Terminal: </label><input type="number" name="Terminal" placeholder="1" />
-    </div>
-    <div>
-        <label>Gate: </label><input type="text" name="Gate" placeholder="C15" />
-    </div>
-    <div>
-        <label>Destination: </label><input type="text" name="Destination" placeholder="Sudbury" />
-    </div>
-    <div>
-        <label>DepartureTime: </label><input type="datetime-local" name="DepartureTime" />
-    </div>
-    <div>
-        <label>Arrival Time: </label><input type="datetime-local" name="ArrivalTime" />
-    </div>
-    <div>
-        <label>FlightStatus: </label><input type="text" name="FlightStatus" />
-    </div>
-    <div>
-        <input type="submit" value="Add Flight" />
+        <button type="submit" class="btn btn-primary" value="Add Flight" >Submit</button>
     </div>
 </form>
 

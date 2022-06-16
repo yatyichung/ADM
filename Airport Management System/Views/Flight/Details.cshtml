@@ -6,27 +6,122 @@
 
 <h2>Details - @Model.SelectedFlight.FlightNum</h2>
 
-<a href="/Flight/List">Go Back to list</a>
-<br />
-<a href="/Flight/Edit/@Model.SelectedFlight.FlightId">Edit</a>
-<br />
-<a style="color:#ab2020;" href="/Flight/DeleteConfirm/@Model.SelectedFlight.FlightId">Delete</a>
-<div>Airline: @Model.SelectedFlight.Airline</div>
-<div>Terminal: @Model.SelectedFlight.Terminal</div>
-<div>Gate: @Model.SelectedFlight.Gate</div>
-<div>Status: @Model.SelectedFlight.FlightStatus</div>
-<div>Destination: @Model.SelectedFlight.Destination</div>
-<div>Departure Time: @Model.SelectedFlight.DepartureTime</div>
-<div>ArrivalTime: @Model.SelectedFlight.ArrivalTime</div>
-
-
-<div style="margin-top:150px;">
-
-    <h3>Passengers in Flight @Model.SelectedFlight.FlightNum .</h3>
-    @foreach(var passenger in Model.RelatedPassengers)
-            {
-                <a href="/passenger/Details/@passenger.PassengerId">@passenger.PassengerFName @passenger.PassengerLName</a>
-                <br />
-            }
-
+<div class="link">
+    <a type="button" class="btn btn-warning" href="/Flight/List">Go Back to list</a>
+    <a type="button" class="btn btn-danger right" href="/Flight/DeleteConfirm/@Model.SelectedFlight.FlightId">Delete</a>
+    <a type="button" class="btn btn-info right" href="/Flight/Edit/@Model.SelectedFlight.FlightId">Edit</a>
 </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3  text-center col-box">
+            <div class="title">Flight Number <i class="fa-solid fa-hashtag"></i></div>
+            <p>@Model.SelectedFlight.FlightNum</p>
+        </div>
+        <div class="col-sm-3 bg-info text-white text-center col-box">
+            <div class="title">Airline <i class="fa-solid fa-plane"></i></div>
+            <p>@Model.SelectedFlight.Airline</p>
+        </div>
+
+        <div class="col-sm-3 text-center col-box">
+            <div class="title">Terminal <i class="fa-solid fa-building"></i></div>
+            <p> @Model.SelectedFlight.Terminal</p>
+        </div>
+
+        <div class="col-sm-3 bg-info text-white text-center col-box">
+            <div class="title">Gate <i class="fa-solid fa-torii-gate"></i></div>
+            <p> @Model.SelectedFlight.Gate</p>
+        </div>
+        <div class="col-sm-3 bg-info text-white text-center col-box">
+            <div class="title">Status <i class="fa-solid fa-circle-info"></i></div>
+            <p id="status"> @Model.SelectedFlight.FlightStatus</p>
+        </div>
+        <div class="col-sm-3 text-center col-box">
+            <div class="title">Destination <i class="fa-solid fa-location-dot"></i></div>
+            <p>@Model.SelectedFlight.Destination</p>
+        </div>
+
+        <div class="col-sm-3 bg-info text-white text-center col-box">
+            <div class="title"> Departure Time <i class="fa-solid fa-plane-departure"></i></div>
+            <p>@Model.SelectedFlight.DepartureTime</p>
+        </div>
+
+        <div class="col-sm-3 text-center col-box">
+            <div class="title">Arrival Time <i class="fa-solid fa-plane-arrival"></i></div>
+            <p>@Model.SelectedFlight.ArrivalTime</p>
+        </div>
+
+
+    </div>
+</div>
+
+<h3>Passengers in Flight @Model.SelectedFlight.FlightNum </h3>
+<table>
+    <tr>
+        <th>First Name </th>
+        <th>Last Name</th>
+        <th>Class</th>
+        <th>Seating Number</th>
+    </tr>
+    @foreach (var passenger in Model.RelatedPassengers)
+    {
+        <tr>
+            <td>@passenger.PassengerFName</td>
+            <td> @passenger.PassengerLName</td>
+            <td>@passenger.PassengerSeatingClasses</td>
+            <td>@passenger.PassengerSeatingNum</td>
+            <td><a href="/passenger/Details/@passenger.PassengerId">View Passenger</a></td>
+        </tr>
+    }
+</table>
+
+
+
+<script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
+
+<style>
+    a {
+        display: inline-block;
+    }
+
+    .right {
+        float: right;
+        margin-left: 5px;
+    }
+
+    .col-box {
+        margin-bottom: 5px;
+        padding: 50px 0;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .link {
+        margin-bottom: 15px;
+    }
+
+    p {
+        padding: 5px 0;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    tr:nth-child(even) {
+        background-color: darkseagreen;
+    }
+</style>

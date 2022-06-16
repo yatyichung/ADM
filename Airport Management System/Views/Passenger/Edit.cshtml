@@ -8,47 +8,53 @@
     <h1>Edit Passenger Info</h1>
 
 </div>
-<nav>
-    <ul>
-        <li><a href="/Passenger/Details/@Model.SelectedPassenger.PassengerId">Back to @Model.SelectedPassenger.PassengerFName @Model.SelectedPassenger.PassengerLName </a></li>
-        <li><a href="/Passenger/List">Go back to passenger list</a></li>
-    </ul>
-</nav>
 
-<form action="/Passenger/Update/@Model.SelectedPassenger.PassengerId" method="POST">
+<a type="button" class="btn btn-warning" href="/Passenger/List">Back to passenger list</a>
+<a href="/Passenger/Details/@Model.SelectedPassenger.PassengerId" type="button" class="btn btn-info">Back to @Model.SelectedPassenger.PassengerFName @Model.SelectedPassenger.PassengerLName</a>
+
+<form action="/Passenger/Update/@Model.SelectedPassenger.PassengerId" method="POST" enctype="multipart/form-data">
     <div style="display:none;">
         @* Pass through the passenger ID *@
         <input type="number" name="PassengerId" value="@Model.SelectedPassenger.PassengerId" />
     </div>
-    <div>
-        <label>First name: </label><input type="text" name="PassengerFName" value="@Model.SelectedPassenger.PassengerFName" />
+    <div class="form-group">
+        <label for="PassengerFName">First name: </label>
+        <input type="text" name="PassengerFName" value="@Model.SelectedPassenger.PassengerFName" id="PassengerFName"  class="form-control" />
     </div>
-    <div>
-        <label>Last name: </label><input type="text" name="PassengerLName" value="@Model.SelectedPassenger.PassengerLName"/>
+    <div class="form-group">
+        <label for="PassengerLName">Last name: </label>
+        <input type="text" name="PassengerLName" value="@Model.SelectedPassenger.PassengerLName" id="PassengerLName"  class="form-control" />
     </div>
-    <div>
-        <label>Passport number: </label><input type="text" name="PassengerPassport" value="@Model.SelectedPassenger.PassengerPassport"  />
+    <div class="form-group">
+        <label for="PassengerPassport">Passport number: </label>
+        <input type="text" name="PassengerPassport" value="@Model.SelectedPassenger.PassengerPassport"  id="PassengerPassport"  class="form-control" />
     </div>
-    <div>
-        <label>Check-in time: </label><input type="datetime-local" value="@Model.SelectedPassenger.CheckInStatus" name="CheckInStatus" />
+    <div class="form-group">
+        <label for="CheckInStatus">Check-in time: </label>
+        <input type="datetime-local" value="@Model.SelectedPassenger.CheckInStatus" name="CheckInStatus"  id="CheckInStatus"  class="form-control" />
     </div>
-    <div>
-        <label>Class: </label><input type="text" name="PassengerSeatingClasses" value="@Model.SelectedPassenger.PassengerSeatingClasses"  />
+    <div class="form-group">
+        <label for="PassengerSeatingClasses">Class: </label>
+        <input type="text" name="PassengerSeatingClasses" value="@Model.SelectedPassenger.PassengerSeatingClasses"  id="PassengerSeatingClasses"  class="form-control" />
     </div>
-    <div>
-        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" value="@Model.SelectedPassenger.PassengerSeatingNum"  />
+    <div class="form-group">
+        <label for="PassengerSeatingNum">Seating number: </label>
+        <input type="text" name="PassengerSeatingNum" value="@Model.SelectedPassenger.PassengerSeatingNum"  id="PassengerSeatingNum"  class="form-control" />
     </div>
-    <div>
-        <label>Flight Id: </label>
+    <div class="form-group">
+        <label for="FlightId">Flight Id: </label>
 
-        <select name="FlightId">
+        <select name="FlightId" id="FlightId"  class="form-control" >
             @foreach (var flight in Model.FlightsOptions)
             {
                 <option value="@flight.FlightId">@flight.FlightNum</option>
             }
         </select>
     </div>
+
     <div>
-        <input type="submit" value="Update Passenger" />
+        <button type="submit" class="btn btn-primary" value="Update Passenger">Submit</button>
+        <a href="/Passenger/Details/@Model.SelectedPassenger.PassengerId" type="button" class="btn btn-danger ">Cancel</a>
+
     </div>
 </form>

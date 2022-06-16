@@ -31,7 +31,6 @@ namespace Airport_Management_System.Models
         public int FlightId { get; set; }
         public virtual Flight Flight { get; set; }
 
-
     }
 
     public class PassengerDto
@@ -51,6 +50,9 @@ namespace Airport_Management_System.Models
 
         public int FlightId { get; set; }
         public string FlightNum { get; set; }
+
+
+
 
 
     }

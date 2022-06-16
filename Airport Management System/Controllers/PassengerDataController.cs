@@ -17,7 +17,18 @@ namespace Airport_Management_System.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/PassengerData/ListPassengers
+
+
+
+        /// <summary>
+        /// Returns all passengers in the system.
+        /// </summary>
+        /// <returns>
+        /// CONTENT: all passengers in the database, including the flight they are taking.
+        /// </returns>
+        /// <example>
+        /// GET: api/PassengerData/ListPassengers
+        /// </example>
         [HttpGet]
 
         public IEnumerable<PassengerDto> ListPassengers()
@@ -41,8 +52,17 @@ namespace Airport_Management_System.Controllers
             return PassengerDtos;
         }
 
-        
-        // GET: api/PassengerData/ListPassengersForFlight
+        /// <summary>
+        /// Gathers information about all passengers related to a particular flight ID
+        /// </summary>
+        /// <returns>
+        /// CONTENT: all passengers in the database, including the flight they are taking.
+        /// </returns>
+        /// <param name="id">Flight ID.</param>
+        /// <example>
+        /// GET: api/PassengerData/ListPassengersForFlight/17
+        /// </example>
+
         [HttpGet]
         public IEnumerable<PassengerDto> ListPassengersForFlight(int id)
         {
@@ -67,9 +87,19 @@ namespace Airport_Management_System.Controllers
 
 
 
+        /// <summary>
+        /// Returns all passengers in the system.
+        /// </summary>
+        /// <returns>
+        /// CONTENT: A passenger in the system matching up to the passenger ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the passenger</param>
+        /// <example>
+        /// GET: api/PassengerData/FindPassenger/17
+        /// </example>
 
-        // GET: api/PassengerData/FindPassenger/17
-        // GET: api/PassengerData/FindPassenger/26
 
         [ResponseType(typeof(Passenger))]
         [HttpGet]
@@ -96,9 +126,23 @@ namespace Airport_Management_System.Controllers
 
             return Ok(PassengerDto);
         }
-        
 
-        // POST: api/PassengerData/UpdatePassenger/5
+        /// <summary>
+        /// Update a passenger information in the system using POST data input
+        /// </summary>
+        /// <param name="id">Represents the Passenger ID primary key</param>
+        /// <param name="passenger">JSON FORM DATA of a passenger</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/PassengerData/UpdatePassenger/5
+        /// FORM DATA: Passenger JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdatePassenger(int id, Passenger passenger)
@@ -140,7 +184,22 @@ namespace Airport_Management_System.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/PassengerData/AddPassenger
+
+        /// <summary>
+        /// Add a passenger to the system
+        /// </summary>
+        /// <param name="passenger">JSON FORM DATA of a passenger</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Passenger ID, Passenger Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/PassengerData/AddPassenger
+        /// FORM DATA: Passenger JSON Object
+        /// </example>
+
         [ResponseType(typeof(Passenger))]
         [HttpPost]
         public IHttpActionResult AddPassenger(Passenger passenger)
@@ -163,7 +222,19 @@ namespace Airport_Management_System.Controllers
 
 
 
-        // POST: api/PassengerData/DeletePassenger/18
+        /// <summary>
+        /// Deletes a passenger from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the passenger</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/PassengerData/DeletePassenger/18
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Passenger))]
         [HttpPost]
         public IHttpActionResult DeletePassenger(int id)

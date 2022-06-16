@@ -4,11 +4,13 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Passenger/List">Go Back to list</a>
-<br />
-<a href="/Passenger/Edit/@Model.PassengerId">Edit</a>
-<br />
-<a style="color:#ab2020;" href="/Passenger/DeleteConfirm/@Model.PassengerId">Delete</a>
+<div class="link">
+    <a type="button" class="btn btn-warning" href="/Passenger/List">Go Back to list</a>
+    <a type="button" class="btn btn-danger right" href="/Passenger/DeleteConfirm/@Model.PassengerId">Delete</a>
+    <a type="button" class="btn btn-info right" href="/Passenger/Edit/@Model.PassengerId">Edit</a>
+</div>
+
+
 <h2>@Model.PassengerFName @Model.PassengerLName</h2>
 <div>Passport Number: @Model.PassengerPassport</div>
 <div>Check-in Time: @Model.CheckInStatus</div>
@@ -18,3 +20,19 @@
 
 
 
+
+
+
+
+
+
+<style>
+    .right {
+        float: right;
+        margin-left: 5px;
+    }
+
+    .link {
+        margin: 15px 0;
+    }
+</style>

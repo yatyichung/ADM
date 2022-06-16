@@ -7,27 +7,33 @@
 <h2>Create Passenger</h2>
 
 <form action="/Passenger/Create" method="POST">
-    <div>
-        <label>First name: </label><input type="text" name="PassengerFName" placeholder="John" />
+    <div class="form-group">
+        <label for="PassengerFName">First name: </label>
+        <input type="text" name="PassengerFName" placeholder="John" id="PassengerFName" class="form-control" />
     </div>
-    <div>
-        <label>Last name: </label><input type="text" name="PassengerLName" placeholder="Doe" />
+    <div class="form-group">
+        <label for="PassengerLName">Last name: </label>
+        <input type="text" name="PassengerLName" placeholder="Doe" id="PassengerLName"  class="form-control" />
     </div>
-    <div>
-        <label>Passport number: </label><input type="text" name="PassengerPassport" placeholder="HK12345678" />
+    <div class="form-group">
+        <label for="PassengerPassport">Passport number: </label>
+        <input type="text" name="PassengerPassport" placeholder="HK12345678"  id="PassengerPassport" class="form-control" />
     </div>
-    <div>
-        <label>Check-in time: </label><input type="datetime-local" name="CheckInStatus" />
+    <div class="form-group">
+        <label for="CheckInStatus">Check-in time: </label>
+        <input type="datetime-local" name="CheckInStatus"  id="CheckInStatus" class="form-control" />
     </div>
-    <div>
-        <label>Class: </label><input type="text" name="PassengerSeatingClasses" placeholder="First Class/Business/Economy" />
+    <div class="form-group">
+        <label for="PassengerSeatingClasses">Class: </label>
+        <input type="text" name="PassengerSeatingClasses" placeholder="First Class/Business/Economy"  id="PassengerSeatingClasses" class="form-control" />
     </div>
-    <div>
-        <label>Seating number: </label><input type="text" name="PassengerSeatingNum" placeholder="G15" />
+    <div class="form-group">
+        <label for="PassengerSeatingNum">Seating number: </label>
+        <input type="text" name="PassengerSeatingNum" placeholder="G15"  id="PassengerSeatingNum" class="form-control"  />
     </div>
-    <div>
-        <label>Flight Id: </label>
-        <select name="FlightId">
+    <div class="form-group">
+        <label for="FlightId">Flight Id: </label>
+        <select name="FlightId"  id="FlightId"  class="form-control" >
             @foreach (var flight in Model)
             {
                 <option value="@flight.FlightId">@flight.FlightNum</option>
@@ -36,7 +42,7 @@
        
     </div>
     <div>
-        <input type="submit" value="Add Passenger" />
+        <button type="submit" class="btn btn-primary"  value="Add Passenger" >Submit</button>
     </div>
 </form>
 

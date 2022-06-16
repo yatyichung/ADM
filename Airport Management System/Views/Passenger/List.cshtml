@@ -6,12 +6,45 @@
 }
 
 <h2>List Passengers</h2>
-<a href="/Passenger/New">New Passenger</a>
-@foreach (var passenger in Model)
-{
-    <h2><a href="/Passenger/Details/@passenger.PassengerId">@passenger.PassengerFName @passenger.PassengerLName</a></h2>
-    <div>Passport Number: @passenger.PassengerPassport</div>
-    <div>Check-in Time: @passenger.CheckInStatus</div>
+
+<a href="/Passenger/New" type="button" class="btn btn-info">Add A Passenger</a>
 
 
-}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Passport Number</th>
+        <th>Check-in Status</th>
+
+    </tr>
+    @foreach (var passenger in Model)
+    {
+        <tr>
+            <td>@passenger.PassengerFName @passenger.PassengerLName</td>
+            <td>@passenger.PassengerPassport</td>
+            <td>@passenger.CheckInStatus</td>
+            <td><a href="/Passenger/Details/@passenger.PassengerId">View Details</a></td>
+        </tr>
+    }
+</table>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    tr:nth-child(even) {
+        background-color: darkseagreen;
+    }
+</style>
