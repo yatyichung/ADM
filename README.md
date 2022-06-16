@@ -9,7 +9,7 @@
   <li> Make sure there is an App_Data folder in the project (Right click solution > View in File Explorer)</li>
   <li>Tools > Nuget Package Manager > Package Manage Console > Update-Database</li>
   <li>Check that the database is created using (View > SQL Server Object Explorer > MSSQLLocalDb > ..)</li>
-  <li>Run API commands through CURL to create new animals</li>
+  <li>Run API commands through CURL to create new passengers</li>
  
 
 
