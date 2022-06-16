@@ -6,6 +6,6 @@
 
 <h2>🏃 Run the project</h2>
 
-<h2>🎯 Project Goal</h2>
-
-<h2>✨ Features</h2>
+<h2>ℹ✨ About </h2>
+Airport Database Management is a web application built using C# in the ASP.NET MVC framework. It is a minimum viable product that allows unauthorized users (passengers) to view the flight schedule of the day departs from Toronto Pearson Airport and authorized users (employee/database adminstrator) to Create, Read, Updata, and Delete data from both the flight schedule as well as the passenger list.  
+  
