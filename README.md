@@ -2,8 +2,6 @@
   
   ![Capture](https://user-images.githubusercontent.com/78622789/174190796-1f12addc-635f-4992-80ff-c9af47d68f7b.PNG)
 
-
-
 <h2>🏃 Run the project</h2>
    <li>Clone a repository > (enter repository location) https://github.com/yatyichung/HTTP5212_PassionProject_n01492932.git</li>
   <li> Make sure there is an App_Data folder in the project (Right click solution > View in File Explorer)</li>
